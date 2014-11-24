@@ -2,9 +2,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Palette Ecology of Mind</title>
-	    <script type="text/javascript" src="d3.js"></script>
-	    <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-	    <script type="text/javascript" src="queue.v1.min.js" ></script>
+	    <script type="text/javascript" src="javascript/d3.js"></script>
+	    <script type="text/javascript" src="javascript/jquery-2.1.1.min.js"></script>
+	    <script type="text/javascript" src="javascript/queue.v1.min.js" ></script>
 		<script type="text/javascript">
 
 		var ficSVG = "paletteecologyofmind.svg";
@@ -78,32 +78,32 @@
 			//suppression du texte existant
 			cacherMeteo();
 
-			//décalage du conteneur par rapport au clic
+			//dï¿½calage du conteneur par rapport au clic
 			var x_decalage = this.getBBox().x;
 			var y_decalage = this.getBBox().y;
 
-			//coordonnées du centre du cercle
+			//coordonnï¿½es du centre du cercle
 			var x_centre = this.getBBox().width / 2;
 			var y_centre = this.getBBox().height / 2;
 
-			//coordonnées du clic de la souris par rapport au cercle
+			//coordonnï¿½es du clic de la souris par rapport au cercle
 			var x_click = d3.mouse(this)[0] - x_decalage;
 			var y_click = d3.mouse(this)[1] - y_decalage;
 
-			//distance de chaque coordonnée du clic par rapport au centre du cercle
+			//distance de chaque coordonnï¿½e du clic par rapport au centre du cercle
 			var dist_x_centre = x_click - x_centre;
 			var dist_y_centre = y_click - y_centre;
 
-			//distance entre le point cliqué et le centre du cercle
+			//distance entre le point cliquï¿½ et le centre du cercle
 			var dist_centre = Math.sqrt(Math.pow(dist_x_centre, 2) + Math.pow(dist_y_centre, 2));
 
-			//cosinus et sinus de l'angle formé entre le clic et le centre du cercle
+			//cosinus et sinus de l'angle formï¿½ entre le clic et le centre du cercle
 			var cos = dist_x_centre / dist_centre;
 			var sin = -dist_y_centre / dist_centre;
 			
 			if(sin > 0){
 				if(cos > 0){
-					//C'est l'été, affiche un texte au dessus de l'élément adapté
+					//C'est l'ï¿½tï¿½, affiche un texte au dessus de l'ï¿½lï¿½ment adaptï¿½
 					d3.select("#g19495")
 		    		    .append("text")
 		    		    .attr("id", "textMeteo")
@@ -113,7 +113,7 @@
 		    		    .text("Ensoleille");
 				}
 				else{
-					//C'est le printemps affiche un texte au dessus de l'élément adapté
+					//C'est le printemps affiche un texte au dessus de l'ï¿½lï¿½ment adaptï¿½
 					d3.select("#g17519")
 		    		    .append("text")
 		    		    .attr("id", "textMeteo")
@@ -125,7 +125,7 @@
 			}
 			else{
 				if(cos > -0.2){
-					//C'est l'automne, affiche un texte au dessus de l'élément adapté
+					//C'est l'automne, affiche un texte au dessus de l'ï¿½lï¿½ment adaptï¿½
 					d3.select("#g18721")
 		    		    .append("text")
 		    		    .attr("id", "textMeteo")
@@ -135,7 +135,7 @@
 		    		    .text("Pluvieux");
 				}
 				else{
-					//C'est l'hiver, affiche un texte au dessus de l'élément adapté
+					//C'est l'hiver, affiche un texte au dessus de l'ï¿½lï¿½ment adaptï¿½
 					d3.select("#g18962")
 		    		    .append("text")
 		    		    .attr("id", "textMeteo")
@@ -154,7 +154,7 @@
 
 
 		function montrerGraphValeur(){
-			//affiche la température au dessus de la barre du graphe
+			//affiche la tempï¿½rature au dessus de la barre du graphe
 			d3.select("svg")
 		  	    .append("text")
 		  	    .attr("id", "textGraphValeur")
@@ -169,45 +169,45 @@
 		}
 		
 		function changerTemperature(){
-			//décalage du conteneur par rapport au clic
+			//dï¿½calage du conteneur par rapport au clic
 			var x_decalage = this.getBBox().x;
 			var y_decalage = this.getBBox().y;
 
-			//coordonnées du centre du cercle
+			//coordonnï¿½es du centre du cercle
 			var x_centre = this.getBBox().width / 2;
 			var y_centre = this.getBBox().height / 2;
 
-			//coordonnées du clic de la souris par rapport au cercle
+			//coordonnï¿½es du clic de la souris par rapport au cercle
 			var x_click = d3.mouse(this)[0] - x_decalage;
 			var y_click = d3.mouse(this)[1] - y_decalage;
 
-			//distance de chaque coordonnée du clic par rapport au centre du cercle
+			//distance de chaque coordonnÃ©e du clic par rapport au centre du cercle
 			var dist_x_centre = x_click - x_centre;
 			var dist_y_centre = y_click - y_centre;
 
-			//distance entre le point cliqué et le centre du cercle
+			//distance entre le point cliquÃ© et le centre du cercle
 			var dist_centre = Math.sqrt(Math.pow(dist_x_centre, 2) + Math.pow(dist_y_centre, 2));
 
-			//cosinus et sinus de l'angle formé entre le clic et le centre du cercle
+			//cosinus et sinus de l'angle formÃ© entre le clic et le centre du cercle
 			var cos = dist_x_centre / dist_centre;
 			var sin = -dist_y_centre / dist_centre;
 
-			//variable de composante de la couleur du thermomètre
+			//variable de composante de la couleur du thermomï¿½tre
 			var r_color;
 			var g_color;
 			var b_color;	
 
-			//varuation de la hauteur du thermomètre
+			//variation de la hauteur du thermomÃ¨tre
 			var h_variation;
 
-			//calcul de la hauteur du thermomètre et de la couleur
+			//calcul de la hauteur du thermomÃ¨tre et de la couleur
 			if(sin > 0){
 				g_color = 255;
 
 				h_variation = 45 + cos * 45; 
 
 				if(cos > 0){
-					//C'est l'été, adapte la couleur
+					//C'est l'Ã©tÃ©, adapte la couleur
 					r_color = 0 + cos * 50;
 					b_color = 0 + cos * 100;
 				}
@@ -245,19 +245,19 @@
 				}
 			}
 
-			//Crée une couleur hexadécimal à partir des trois composantes RGB
+			//CrÃ©e une couleur hexadÃ©cimal Ã  partir des trois composantes RGB
 			var color = RGBToHex(r_color, g_color, b_color);
 
-			//Définit la hauteur à partir de sa variation
+			//DÃ©finit la hauteur Ã  partir de sa variation
 			var hauteur = 95.62735 + h_variation;
 
-			//Change la couleur du cercle du thermomètre
+			//Change la couleur du cercle du thermomÃ¨tre
 			d3.select("#circle21092")
 				.transition()
 				.duration(1500)
 				.style("fill", "#"+color);
 
-			//Change la taille du rectangle de température du cercle
+			//Change la taille du rectangle de tempÃ©rature du cercle
 			d3.select("#rect21094")
 				.transition()
 				.duration(1500)
@@ -265,7 +265,7 @@
 				.attr("y", 318.54865 - h_variation)
 				.style("fill", "#"+color);
 
-			//Change la taille de l'ombre du rectangle de température du cercle
+			//Change la taille de l'ombre du rectangle de tempÃ©rature du cercle
 			d3.select("#rect21050")
 				.transition()
 				.duration(1500)
@@ -402,13 +402,13 @@
 		
 		function updateGraphBar(){
 
-			//définit une marge à gauche
-			var margeGauche = 200;
+			//dÃ©finit une marge Ã  gauche
+			var margeGauche = 0;
 
-			//définit la largeur des barres du graphe
+			//dÃ©finit la largeur des barres du graphe
 			var largeur = (800 - margeGauche) / hauteurs.length;
 
-			//crée une barre pour la nouvelle température
+			//crÃ©e une barre pour la nouvelle tempÃ©rature
 			d3.select("svg")
 				.append("rect")
 				.attr("id", "bar" + hauteurs.length)
