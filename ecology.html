@@ -7,15 +7,16 @@
 	    <script type="text/javascript" src="javascript/queue.v1.min.js" ></script>
 		<script type="text/javascript">
 
-		var ficSVG = "paletteecologyofmind.svg";
+		var ficSVG = "Finalisation.svg";
 
 		var dataProfil;
 
 		var hauteurs = [];
 		var colors = [];
+		var graph_opacity = 0;
 		
 		var arrIds = [
-		      			{"idEle":"circle-haut","fonction":changerTemperature,"params":[{"mes":"coucou"}]}
+		      			{"idEle":"circle-haut","fonction":changerTemperature}
 		      		];
 		
 		function load(){
@@ -44,21 +45,36 @@
 			     		 .on("mousemove", montrerMeteo)
 			     		 .on("mouseout", cacherMeteo);
 			}
+			d3.select("#Restart").on("click", reset)
+								.on("mouseover", animeRestart);
+			d3.select("#Earthbeats").on("click", afficheGraph);
+			d3.select("#Pioupiou").on("click", tweet);
+			d3.select("#download")
+			    .on("click", function () {
+					    var serializer = new XMLSerializer();
+					    var xmlString = serializer.serializeToString(d3.select('svg').node());
+					    var imgData = 'data:image/svg+xml;base64,' + btoa(xmlString);
+					    d3.select("#download").attr("href", imgData);
+					}
+				);
 		}
 
-		function chargeData(){
-			alert("toto");	
+	    function tweet(){
+	    	
+	    	tweetFichier(enregistreSVG());
+	    	
+	    }
+	    
+		function enregistreSVG(){
+			var serializer = new XMLSerializer();
+	    	var xmlString = serializer.serializeToString(d3.select('svg').node());
+	    	var imgData = 'data:image/svg+xml;base64,' + btoa(xmlString);
+	    	
+			return imgData;
 		}
-
-		function sauveSVG(){
-			var svg = document.getElementById("viz").firstChild;
-			svg = svg.outerHTML;
-			var p = {"svg":svg,"titre":"mon beau svg","url":ficSVG};
-			$.post("explo/sauvesvg", p,
-					 function(data){
-						alert(data);
-					 });
-			
+		
+		function tweetFichier(url){
+			console.log(url);
 		}
 
 
@@ -73,6 +89,41 @@
 		    })(bin.toString(16).toUpperCase());
 		}
 
+		function animeRestart(){
+			/*
+			d3.select("#path12343")
+			//.transition()
+			//.delay(500)
+		    //.style("rotation-point", "50% 50%")
+		    //.style("-webkit-transition-duration", "0s")
+		    .style("-webkit-transform-origin", "50% 50%")
+		    .style("-webkit-transform", "rotate(180deg)");
+			//*/
+		}
+
+		function reset(){
+			for(var i = 0; i <= hauteurs.length; i++){
+				d3.select("#bar"+i)
+					.remove();
+			}
+			hauteurs = [];
+			couleurs = [];
+		}
+
+		function afficheGraph(){
+			if(graph_opacity == 0)
+				graph_opacity = 1;
+			else
+				graph_opacity = 0;
+			
+			for(var i = 0; i <= hauteurs.length; i++){
+				d3.select("#bar"+i)
+					.transition()
+					.delay(500)
+					.style("opacity", graph_opacity);
+			}
+		}
+		
 		function montrerMeteo(){
 
 			//suppression du texte existant
@@ -252,13 +303,13 @@
 			var hauteur = 95.62735 + h_variation;
 
 			//Change la couleur du cercle du thermomètre
-			d3.select("#circle21092")
+			d3.select("#circle12296")
 				.transition()
 				.duration(1500)
 				.style("fill", "#"+color);
 
 			//Change la taille du rectangle de température du cercle
-			d3.select("#rect21094")
+			d3.select("#rect12298")
 				.transition()
 				.duration(1500)
 				.attr("height", hauteur)
@@ -277,22 +328,27 @@
 				d3.select("#t1")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t2")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t3")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t4")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t5")
 				.transition()
 				.duration(1500)
+				.style("opacity", 1)
 				.style("fill-opacity", 1);
 			}
 
@@ -300,22 +356,27 @@
 				d3.select("#t1")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t2")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t3")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t4")
 				.transition()
 				.duration(1500)
+				.style("opacity", 1)
 				.style("fill-opacity", 1);
 				d3.select("#t5")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 			}
 
@@ -323,22 +384,27 @@
 				d3.select("#t1")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t2")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t3")
 				.transition()
 				.duration(1500)
+				.style("opacity", 1)
 				.style("fill-opacity", 1);
 				d3.select("#t4")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t5")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 			}
 
@@ -346,22 +412,27 @@
 				d3.select("#t1")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t2")
 				.transition()
 				.duration(1500)
+				.style("opacity", 1)
 				.style("fill-opacity", 1);
 				d3.select("#t3")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t4")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t5")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 			}
 
@@ -369,22 +440,27 @@
 				d3.select("#t1")
 				.transition()
 				.duration(1500)
+				.style("opacity", 1)
 				.style("fill-opacity", 1);
 				d3.select("#t2")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t3")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t4")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 				d3.select("#t5")
 				.transition()
 				.duration(1500)
+				.style("opacity", 0)
 				.style("fill-opacity", 0);
 			}
 
@@ -434,6 +510,6 @@
 	</head>
 	<body onload="load();">
 		<div id="viz" ></div>
-		<div onclick="sauveSVG();" >Sauve SVG</div>		
+		<a id="download" download="download">Télécharger</a>
 	</body>
 </html>
